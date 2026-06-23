@@ -16,7 +16,7 @@ pymupdf==1.24.14          # # Opens and reads text from PDF resume files
 pdfplumber==0.11.0        # # Backup PDF reader — better for complex layouts
 
 # ── AI / NLP ──────────────────────────────────────────────────────
-spacy==3.8.14             # # Natural language processing — understands resume text
+spacy==3.8.13             # # Natural language processing — understands resume text
 # # After installing, run: python -m spacy download en_core_web_sm
 
 # ── FILE HANDLING ─────────────────────────────────────────────────
