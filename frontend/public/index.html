@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!-- # Tells browser this site works on mobile screens too -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- # Browser tab title and theme color -->
+    <meta name="theme-color" content="#1a1a2e" />
+    <meta name="description" content="AI Powered Recruitment Platform" />
+
+    <!-- # The tab title you see in browser -->
+    <title>RecruitAI — Smart Hiring Platform</title>
+
+    <!-- # Google Fonts — clean professional font for our app -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* # Reset default browser styles so everything looks consistent */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* # Apply our chosen font across the entire app */
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        background-color: #f5f7fa;
+        color: #1a1a2e;
+        -webkit-font-smoothing: antialiased; /* # Makes fonts look sharper */
+      }
+
+      /* # This is the empty box React fills everything into */
+      #root {
+        min-height: 100vh; /* # Takes full screen height */
+      }
+
+      /* # Show a loading spinner before React loads */
+      .initial-loader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-size: 18px;
+        color: #2d6a9f;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- # If user has JavaScript disabled, show this message -->
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+
+    <!-- # THE most important div — React puts everything inside here -->
+    <div id="root">
+      <!-- # Shows while React is loading for the first time -->
+      <div class="initial-loader">Loading RecruitAI...</div>
+    </div>
+  </body>
+</html>

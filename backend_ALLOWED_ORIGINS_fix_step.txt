@@ -1,0 +1,8 @@
+Current backend/.env line is still:
+  ALLOWED_ORIGINS=http://localhost:3000
+
+Change it to exactly:
+  ALLOWED_ORIGINS=["http://localhost:3000"]
+
+Then restart uvicorn.
+

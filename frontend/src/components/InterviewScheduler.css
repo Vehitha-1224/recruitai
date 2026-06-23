@@ -1,0 +1,50 @@
+.scheduler {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ─── HEADER ─────────────────────────────────────────────────────*/
+.scheduler__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.scheduler__header-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.scheduler__header-title h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ─── FORM ───────────────────────────────────────────────────────*/
+.scheduler__form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* ─── DATE + TIME SIDE BY SIDE ───────────────────────────────────*/
+.scheduler__datetime {
+  display: grid;
+  grid-template-columns: 1fr 1fr;    /* # Two equal columns */
+  gap: 12px;
+}
+
+/* ─── LABEL WITH ICON ────────────────────────────────────────────*/
+.label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+@media (max-width: 480px) {
+  /* # Stack date/time on very small screens */
+  .scheduler__datetime {
+    grid-template-columns: 1fr;
+  }
+}

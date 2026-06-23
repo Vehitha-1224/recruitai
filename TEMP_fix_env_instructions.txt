@@ -1,0 +1,12 @@
+ALLOWED_ORIGINS is declared as List[str] in backend/app/config.py.
+Current backend/.env sets:
+  ALLOWED_ORIGINS=http://localhost:3000
+
+Pydantic_settings expects a JSON array for List[str] when reading complex values.
+Set backend/.env to:
+  ALLOWED_ORIGINS=["http://localhost:3000"]
+
+Then restart:
+  cd backend
+  uvicorn app.main:app --reload
+

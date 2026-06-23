@@ -1,0 +1,159 @@
+/* ─── CARD CONTAINER ─────────────────────────────────────────────*/
+.candidate-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: var(--transition);
+}
+.candidate-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+  transform: translateY(-2px);        /* # Subtle lift */
+}
+
+/* ─── TOP ROW ────────────────────────────────────────────────────*/
+.candidate-card__top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* # Initials circle avatar */
+.candidate-card__avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.candidate-card__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.candidate-card__name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.candidate-card__email {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-decoration: none;
+  margin-top: 2px;
+}
+.candidate-card__email:hover { color: var(--primary); }
+
+/* ─── SCORE CIRCLE ───────────────────────────────────────────────
+   # CSS variable --score-color set dynamically from JS           */
+.candidate-card__score {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 3px solid var(--score-color);
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-shrink: 0;
+  gap: 1px;
+  padding-top: 4px;
+}
+.candidate-card__score-number {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--score-color);
+}
+.candidate-card__score-label {
+  font-size: 10px;
+  color: var(--score-color);
+  font-weight: 600;
+}
+
+/* ─── JOB ROW ────────────────────────────────────────────────────*/
+.candidate-card__job {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  padding: 4px 0;
+}
+
+/* ─── SKILLS ─────────────────────────────────────────────────────*/
+.candidate-card__skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.candidate-card__skill-tag {
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+
+.candidate-card__skill-more {
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 3px 0;
+}
+
+/* ─── BOTTOM ROW ─────────────────────────────────────────────────*/
+.candidate-card__bottom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+/* # Status badge + hidden select overlay trick */
+.candidate-card__status-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+/* # The actual dropdown — invisible but clickable on top of badge */
+.candidate-card__status-select {
+  position: absolute;
+  inset: 0;
+  opacity: 0;                         /* # Invisible */
+  cursor: pointer;
+  width: 100%;
+}
+
+.candidate-card__date {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.candidate-card__actions {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;                  /* # Push to right */
+}

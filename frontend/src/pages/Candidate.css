@@ -1,0 +1,83 @@
+/* ─── HEADER ROW ─────────────────────────────────────────────────*/
+.candidates__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ─── CONTROLS ───────────────────────────────────────────────────*/
+.candidates__controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* # Active filter badge on filter button */
+.candidates__filter-badge {
+  background: var(--primary);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── VIEW TOGGLE ────────────────────────────────────────────────*/
+.candidates__view-toggle {
+  display: flex;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.candidates__view-btn {
+  background: white;
+  border: none;
+  padding: 7px 12px;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+}
+
+.candidates__view-btn:hover,
+.candidates__view-btn.active {
+  background: var(--primary);
+  color: white;
+}
+
+/* ─── FILTER PANEL ───────────────────────────────────────────────*/
+.candidates__filters {
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.candidates__filters .form-group {
+  flex: 1;
+  min-width: 160px;
+  margin-bottom: 0;
+}
+
+/* ─── CANDIDATES GRID ────────────────────────────────────────────*/
+.candidates__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .candidates__grid { grid-template-columns: 1fr; }
+  .candidates__filters { flex-direction: column; }
+  .candidates__filters .form-group { width: 100%; }
+}

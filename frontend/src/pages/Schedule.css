@@ -1,0 +1,179 @@
+/* ─── FILTERS ROW ────────────────────────────────────────────────*/
+.schedule__filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.schedule__date-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ─── DATE GROUP SECTION ─────────────────────────────────────────*/
+.schedule__group {
+  margin-bottom: 28px;
+}
+
+/* # Date heading row */
+.schedule__date-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* # Interview count badge next to date */
+.schedule__date-count {
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 8px;
+  border-radius: 999px;
+}
+
+/* ─── CARDS CONTAINER ────────────────────────────────────────────*/
+.schedule__cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ─── INTERVIEW CARD ─────────────────────────────────────────────*/
+.interview-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  display: flex;
+  overflow: hidden;
+  transition: var(--transition);
+}
+.interview-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* # Past interview — slightly greyed out */
+.interview-card--past {
+  opacity: 0.7;
+}
+
+/* # Left colour bar */
+.interview-card__bar {
+  width: 4px;
+  background: var(--interview-color);
+  flex-shrink: 0;
+}
+
+/* ─── CARD BODY ──────────────────────────────────────────────────*/
+.interview-card__body {
+  padding: 16px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ─── TOP ROW ────────────────────────────────────────────────────*/
+.interview-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* # Date and time stacked */
+.interview-card__datetime {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.interview-card__date,
+.interview-card__time {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.interview-card__date {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ─── STATUS ─────────────────────────────────────────────────────*/
+.interview-card__status-wrap {
+  position: relative;
+}
+
+.interview-card__status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* # Invisible dropdown over status badge */
+.interview-card__status-select {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* ─── CANDIDATE + JOB INFO ───────────────────────────────────────*/
+.interview-card__info {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.interview-card__person {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.interview-card__name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.interview-card__role {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.interview-card__interviewer {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.interview-card__notes {
+  font-size: 12px;
+  color: var(--text-secondary);
+  background: var(--bg);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--border);
+}
+
+@media (max-width: 600px) {
+  .interview-card__top { flex-direction: column; }
+  .schedule__filters   { flex-direction: column; align-items: flex-start; }
+}

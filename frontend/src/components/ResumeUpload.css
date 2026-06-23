@@ -1,0 +1,141 @@
+.resume-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.resume-upload__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.resume-upload__header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ─── DROP ZONE ──────────────────────────────────────────────────*/
+.resume-upload__dropzone {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-md);
+  padding: 40px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* # Highlight when user drags file over it */
+.resume-upload__dropzone--active {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.resume-upload__dropzone:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
+
+.resume-upload__icon {
+  color: var(--primary);
+  opacity: 0.6;
+}
+
+.resume-upload__text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.resume-upload__hint {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ─── FILE LIST ──────────────────────────────────────────────────*/
+.resume-upload__files {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+/* # Progress bar background */
+.resume-upload__progress-bar {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+/* # Progress bar fill — width controlled by JS */
+.resume-upload__progress-fill {
+  height: 100%;
+  background: var(--primary);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+/* ─── SINGLE FILE ROW ────────────────────────────────────────────*/
+.resume-upload__file-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.resume-upload__file-info {
+  flex: 1;
+  min-width: 0;                       /* # Allows text to truncate */
+}
+
+.resume-upload__file-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  /* # Cut off long filenames with ... */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.resume-upload__file-size {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+.resume-upload__file-action {
+  flex-shrink: 0;
+}
+
+/* # Small X button to remove file */
+.resume-upload__remove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+}
+.resume-upload__remove:hover {
+  color: var(--danger);
+  background: #fee2e2;
+}
+
+/* # Spinning animation for loading icon */
+.spin {
+  animation: spin 0.8s linear infinite;
+  color: var(--primary);
+}

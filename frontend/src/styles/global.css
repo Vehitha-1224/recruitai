@@ -1,0 +1,200 @@
+/* ─── COLOUR VARIABLES ───────────────────────────────────────────────
+   # Define all colours in one place
+   # Change a colour here → changes everywhere in the app            */
+:root {
+  --primary:        #2d6a9f;   /* # Main blue — buttons, links       */
+  --primary-dark:   #1a4f7a;   /* # Darker blue — hover states       */
+  --primary-light:  #e8f1fa;   /* # Very light blue — backgrounds    */
+  --secondary:      #1a1a2e;   /* # Dark navy — headings, sidebar    */
+  --success:        #22c55e;   /* # Green — hired, success states    */
+  --warning:        #f59e0b;   /* # Orange — screening, warnings     */
+  --danger:         #ef4444;   /* # Red — rejected, errors           */
+  --info:           #3b82f6;   /* # Blue — interview stage           */
+  --bg:             #f5f7fa;   /* # Page background                  */
+  --card-bg:        #ffffff;   /* # Card/panel background            */
+  --border:         #e2e8f0;   /* # Borders and dividers             */
+  --text-primary:   #1a1a2e;   /* # Main text colour                 */
+  --text-secondary: #64748b;   /* # Lighter text — labels, hints     */
+  --text-muted:     #94a3b8;   /* # Very light text — placeholders   */
+  --shadow-sm:      0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md:      0 4px 12px rgba(0,0,0,0.10);
+  --shadow-lg:      0 8px 24px rgba(0,0,0,0.12);
+  --radius-sm:      6px;
+  --radius-md:      10px;
+  --radius-lg:      16px;
+  --transition:     all 0.2s ease; /* # Smooth animations          */
+}
+
+/* ─── SCROLLBAR STYLING ─────────────────────────────────────────────
+   # Make the browser scrollbar match our design                     */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ─── REUSABLE UTILITY CLASSES ──────────────────────────────────────
+   # Small classes we reuse across all components                    */
+
+/* # Flex row with centered items */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* # Flex row with space between items */
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* # Standard card — white box with shadow */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  padding: 24px;
+  transition: var(--transition);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* ─── BUTTON STYLES ─────────────────────────────────────────────── */
+
+/* # Base button — applied to all buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+  font-family: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* # Primary button — main actions */
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--primary-dark);
+  transform: translateY(-1px);    /* # Subtle lift on hover */
+  box-shadow: var(--shadow-md);
+}
+
+/* # Outline button — secondary actions */
+.btn-outline {
+  background: transparent;
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+}
+.btn-outline:hover:not(:disabled) {
+  background: var(--primary-light);
+}
+
+/* # Danger button — delete/reject actions */
+.btn-danger {
+  background: var(--danger);
+  color: white;
+}
+.btn-danger:hover:not(:disabled) {
+  background: #dc2626;
+}
+
+/* # Ghost button — subtle actions */
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+}
+.btn-ghost:hover:not(:disabled) {
+  background: var(--bg);
+  color: var(--text-primary);
+}
+
+/* # Small button size modifier */
+.btn-sm {
+  padding: 6px 14px;
+  font-size: 13px;
+}
+
+/* ─── STATUS BADGE STYLES ────────────────────────────────────────── */
+/* # Small coloured labels showing candidate stage                   */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;           /* # Pill shape */
+  font-size: 12px;
+  font-weight: 500;
+}
+.badge-applied   { background: #e0e7ff; color: #3730a3; }
+.badge-screening { background: #fef3c7; color: #92400e; }
+.badge-interview { background: #dbeafe; color: #1e40af; }
+.badge-offered   { background: #d1fae5; color: #065f46; }
+.badge-hired     { background: #dcfce7; color: #14532d; }
+.badge-rejected  { background: #fee2e2; color: #7f1d1d; }
+
+/* ─── FORM INPUT STYLES ─────────────────────────────────────────── */
+.input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: white;
+  transition: var(--transition);
+  outline: none;
+}
+.input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(45,106,159,0.1); /* # Focus glow */
+}
+.input::placeholder { color: var(--text-muted); }
+
+.label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+/* ─── LOADING SPINNER ────────────────────────────────────────────── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* ─── PAGE LAYOUT ────────────────────────────────────────────────── */

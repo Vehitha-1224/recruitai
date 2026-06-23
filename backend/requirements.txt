@@ -1,0 +1,29 @@
+# ── WEB FRAMEWORK ────────────────────────────────────────────────
+fastapi==0.110.0          # # The main framework that handles all API requests
+uvicorn==0.27.1           # # The server that runs FastAPI (like Apache for Python)
+
+# ── DATABASE ──────────────────────────────────────────────────────
+sqlalchemy==2.0.28        # # Talks to PostgreSQL — lets us write Python instead of SQL
+psycopg2-binary==2.9.12   # # PostgreSQL driver — actual connector between Python and DB
+alembic==1.13.1           # # Database migration tool — safely updates DB structure
+
+# ── DATA VALIDATION ───────────────────────────────────────────────
+pydantic==2.13.4          # # Validates incoming data — rejects wrong formats
+pydantic-settings==2.8.1  # # Loads .env config file values into Python
+
+# ── PDF READING ───────────────────────────────────────────────────
+pymupdf==1.24.14          # # Opens and reads text from PDF resume files
+pdfplumber==0.11.0        # # Backup PDF reader — better for complex layouts
+
+# ── AI / NLP ──────────────────────────────────────────────────────
+spacy==3.8.14             # # Natural language processing — understands resume text
+# # After installing, run: python -m spacy download en_core_web_sm
+
+# ── FILE HANDLING ─────────────────────────────────────────────────
+python-multipart==0.0.9   # # Enables FastAPI to receive uploaded files
+
+# ── UTILITIES ─────────────────────────────────────────────────────
+python-dotenv==1.0.1      # # Reads .env file for secret config values
+passlib==1.7.4            # # Password hashing — for future auth feature
+python-jose==3.3.0        # # JWT tokens — for future auth feature
+httpx==0.27.0             # # HTTP client — for testing API endpoints

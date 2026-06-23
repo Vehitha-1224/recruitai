@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/static/css/main.69266ed8.css",
+    "main.js": "/static/js/main.fcda6904.js",
+    "static/css/647.d77a4a57.chunk.css": "/static/css/647.d77a4a57.chunk.css",
+    "static/js/647.3fe654ea.chunk.js": "/static/js/647.3fe654ea.chunk.js",
+    "static/css/413.7641929e.chunk.css": "/static/css/413.7641929e.chunk.css",
+    "static/js/413.48711053.chunk.js": "/static/js/413.48711053.chunk.js",
+    "static/css/793.d3d4d237.chunk.css": "/static/css/793.d3d4d237.chunk.css",
+    "static/js/793.9ffb041f.chunk.js": "/static/js/793.9ffb041f.chunk.js",
+    "static/css/870.5a1a6550.chunk.css": "/static/css/870.5a1a6550.chunk.css",
+    "static/js/870.eee7b6ad.chunk.js": "/static/js/870.eee7b6ad.chunk.js",
+    "static/js/77.9b49f88d.chunk.js": "/static/js/77.9b49f88d.chunk.js",
+    "static/js/265.efeeb30e.chunk.js": "/static/js/265.efeeb30e.chunk.js",
+    "static/js/911.0c132c8c.chunk.js": "/static/js/911.0c132c8c.chunk.js",
+    "index.html": "/index.html",
+    "main.69266ed8.css.map": "/static/css/main.69266ed8.css.map",
+    "main.fcda6904.js.map": "/static/js/main.fcda6904.js.map",
+    "647.d77a4a57.chunk.css.map": "/static/css/647.d77a4a57.chunk.css.map",
+    "647.3fe654ea.chunk.js.map": "/static/js/647.3fe654ea.chunk.js.map",
+    "413.7641929e.chunk.css.map": "/static/css/413.7641929e.chunk.css.map",
+    "413.48711053.chunk.js.map": "/static/js/413.48711053.chunk.js.map",
+    "793.d3d4d237.chunk.css.map": "/static/css/793.d3d4d237.chunk.css.map",
+    "793.9ffb041f.chunk.js.map": "/static/js/793.9ffb041f.chunk.js.map",
+    "870.5a1a6550.chunk.css.map": "/static/css/870.5a1a6550.chunk.css.map",
+    "870.eee7b6ad.chunk.js.map": "/static/js/870.eee7b6ad.chunk.js.map",
+    "77.9b49f88d.chunk.js.map": "/static/js/77.9b49f88d.chunk.js.map",
+    "265.efeeb30e.chunk.js.map": "/static/js/265.efeeb30e.chunk.js.map",
+    "911.0c132c8c.chunk.js.map": "/static/js/911.0c132c8c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.69266ed8.css",
+    "static/js/main.fcda6904.js"
+  ]
+}
