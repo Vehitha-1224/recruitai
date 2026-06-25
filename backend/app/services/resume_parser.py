@@ -3,26 +3,24 @@ import logging
 from pathlib import Path
 from typing  import Dict, List, Optional, Any
 
-# # fitz = PyMuPDF — our primary PDF text extractor
+# # PyMuPDF — primary PDF text extractor
 import fitz
 
-# # pdfplumber — backup PDF reader for complex layouts
+# # pdfplumber — backup PDF reader
 import pdfplumber
 
 logger = logging.getLogger(__name__)
 
 # ─── SKILLS DICTIONARY ────────────────────────────────────────────
-# # Master list of skills our parser looks for in resumes
-# # Add more as needed for your industry
 KNOWN_SKILLS = {
     # # Frontend
-    "react", "reactjs", "react.js", "vue", "vuejs", "angular",
+    "react", "reactjs", "vue", "vuejs", "angular",
     "javascript", "typescript", "html", "css", "sass", "tailwind",
-    "nextjs", "next.js", "redux", "webpack",
+    "nextjs", "redux", "webpack",
 
     # # Backend
-    "python", "fastapi", "django", "flask", "node.js", "nodejs",
-    "express", "java", "spring", "springboot", "golang", "go",
+    "python", "fastapi", "django", "flask", "nodejs",
+    "express", "java", "spring", "springboot", "golang",
     "php", "laravel", "ruby", "rails",
 
     # # Database
@@ -31,36 +29,32 @@ KNOWN_SKILLS = {
 
     # # Cloud & DevOps
     "aws", "azure", "gcp", "docker", "kubernetes", "terraform",
-    "ci/cd", "jenkins", "github actions", "linux",
+    "jenkins", "linux",
 
     # # Data & AI
     "machine learning", "deep learning", "tensorflow", "pytorch",
-    "pandas", "numpy", "scikit-learn", "nlp", "computer vision",
+    "pandas", "numpy", "scikit-learn", "nlp",
     "data analysis", "sql", "power bi", "tableau",
 
     # # Mobile
     "flutter", "react native", "swift", "kotlin", "android", "ios",
 }
 
-# ─── EMAIL PATTERN ────────────────────────────────────────────────
+# ─── REGEX PATTERNS ───────────────────────────────────────────────
 EMAIL_PATTERN = re.compile(
     r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
 )
 
-# ─── PHONE PATTERN ────────────────────────────────────────────────
 PHONE_PATTERN = re.compile(
-    r'(\+91[\s\-]?)?[6-9]\d{9}'   # # Indian mobile numbers
-    r'|(\+\d{1,3}[\s\-]?)?\(?\d{3}\)?[\s\-]?\d{3}[\s\-]?\d{4}'  # # International
+    r'(\+91[\s\-]?)?[6-9]\d{9}'
+    r'|(\+\d{1,3}[\s\-]?)?\(?\d{3}\)?[\s\-]?\d{3}[\s\-]?\d{4}'
 )
 
-# ─── EXPERIENCE PATTERN ───────────────────────────────────────────
-# # Finds strings like "3 years", "5+ years", "2.5 years experience"
 EXPERIENCE_PATTERN = re.compile(
     r'(\d+\.?\d*)\s*\+?\s*(?:years?|yrs?)(?:\s+of)?\s*(?:experience|exp)?',
     re.IGNORECASE
 )
 
-# ─── EDUCATION KEYWORDS ───────────────────────────────────────────
 DEGREE_KEYWORDS = [
     "b.tech", "btech", "b.e.", "be", "bachelor",
     "m.tech", "mtech", "m.e.", "me", "master",
@@ -71,40 +65,28 @@ DEGREE_KEYWORDS = [
 
 class ResumeParser:
     """
-    Reads a PDF resume and extracts structured information:
-    - Name
-    - Email
-    - Phone
-    - Skills
-    - Years of experience
-    - Education
-    - Raw text (for AI scoring)
+    Reads a PDF resume and extracts structured information
+    using regex patterns — no external AI library needed.
     """
 
     def __init__(self, file_path: str):
-        self.file_path = Path(file_path)
-        # # Will hold all extracted text from PDF
+        self.file_path  = Path(file_path)
         self._raw_text: Optional[str] = None
 
-    # ── STEP 1: EXTRACT TEXT FROM PDF ────────────────────────────
+    # ── EXTRACT TEXT FROM PDF ─────────────────────────────────────
     def _extract_text(self) -> str:
-        """
-        Tries PyMuPDF first (faster), falls back to pdfplumber.
-        Returns all text from the PDF as one string.
-        """
+        """Tries PyMuPDF first, falls back to pdfplumber."""
         if self._raw_text:
-            # # Already extracted — don't repeat work
             return self._raw_text
 
         text = ""
 
-        # # Try PyMuPDF first
+        # # Try PyMuPDF first — faster
         try:
             doc = fitz.open(str(self.file_path))
             for page in doc:
                 text += page.get_text()
             doc.close()
-
             if text.strip():
                 self._raw_text = text
                 return text
@@ -125,121 +107,74 @@ class ResumeParser:
         self._raw_text = text
         return text
 
-    # ── STEP 2: EXTRACT NAME ──────────────────────────────────────
+    # ── EXTRACT NAME ──────────────────────────────────────────────
     def _extract_name(self, text: str) -> str:
-        """
-        Tries to find the candidate's name.
-        Strategy: name is usually in the first 3 lines of a resume.
-        """
-        lines = [
-            line.strip()
-            for line in text.split('\n')
-            if line.strip()          # # Skip empty lines
-        ]
-
-        # # Check first 3 non-empty lines
+        """Name is usually in first 3 lines of resume."""
+        lines = [l.strip() for l in text.split('\n') if l.strip()]
         for line in lines[:3]:
-            # # Name line should be 2-5 words, no numbers, not too long
             words = line.split()
             if (
                 2 <= len(words) <= 5 and
                 len(line) <= 60 and
-                not re.search(r'\d', line) and          # # No numbers in name
-                not re.search(r'@|http|www', line) and  # # Not email/URL
-                line[0].isupper()                        # # Starts with capital
+                not re.search(r'\d', line) and
+                not re.search(r'@|http|www', line) and
+                line[0].isupper()
             ):
-                return line.title()  # # Capitalize each word
-
-        # # Fallback — return first line
+                return line.title()
         return lines[0].title() if lines else "Unknown"
 
-    # ── STEP 3: EXTRACT EMAIL ─────────────────────────────────────
+    # ── EXTRACT EMAIL ─────────────────────────────────────────────
     def _extract_email(self, text: str) -> Optional[str]:
-        """Finds email address using regex pattern."""
         matches = EMAIL_PATTERN.findall(text)
         return matches[0].lower() if matches else None
 
-    # ── STEP 4: EXTRACT PHONE ─────────────────────────────────────
+    # ── EXTRACT PHONE ─────────────────────────────────────────────
     def _extract_phone(self, text: str) -> Optional[str]:
-        """Finds phone number using regex pattern."""
         matches = PHONE_PATTERN.findall(text)
-        # # findall returns tuples — get the full match string
         for match in matches:
             phone = match[0] if isinstance(match, tuple) else match
             if phone:
-                return re.sub(r'\s+', '', phone)  # # Remove spaces
+                return re.sub(r'\s+', '', phone)
         return None
 
-    # ── STEP 5: EXTRACT SKILLS ────────────────────────────────────
+    # ── EXTRACT SKILLS ────────────────────────────────────────────
     def _extract_skills(self, text: str) -> List[str]:
-        """
-        Scans resume text for known skills from our KNOWN_SKILLS list.
-        Case-insensitive matching.
-        """
-        text_lower = text.lower()
+        """Scans resume for known skills using word boundary matching."""
+        text_lower   = text.lower()
         found_skills = []
-
         for skill in KNOWN_SKILLS:
-            # # Use word boundary to avoid partial matches
-            # # e.g. "go" should not match inside "django"
             pattern = r'\b' + re.escape(skill) + r'\b'
             if re.search(pattern, text_lower):
-                # # Store in proper case for display
                 found_skills.append(skill.title())
-
-        # # Sort alphabetically for consistency
         return sorted(list(set(found_skills)))
 
-    # ── STEP 6: EXTRACT EXPERIENCE ───────────────────────────────
+    # ── EXTRACT EXPERIENCE ────────────────────────────────────────
     def _extract_experience(self, text: str) -> Optional[float]:
-        """
-        Finds mentions of years of experience.
-        Returns the highest number found (most likely total experience).
-        """
+        """Finds years of experience mentioned in resume."""
         matches = EXPERIENCE_PATTERN.findall(text)
         if not matches:
             return None
-
-        # # Convert all found numbers to float
         years = [float(m) for m in matches if m]
-
-        # # Return highest value found
-        # # (prevents picking up "1 year in college" over "5 years total")
         return max(years) if years else None
 
-    # ── STEP 7: EXTRACT EDUCATION ────────────────────────────────
+    # ── EXTRACT EDUCATION ─────────────────────────────────────────
     def _extract_education(self, text: str) -> Optional[str]:
-        """
-        Looks for degree keywords in the resume.
-        Returns the first degree found.
-        """
+        """Looks for degree keywords in the resume."""
         text_lower = text.lower()
-
         for degree in DEGREE_KEYWORDS:
             if degree in text_lower:
-                # # Find the line containing this degree keyword
                 for line in text.split('\n'):
                     if degree in line.lower() and len(line) < 150:
                         return line.strip()
-
         return None
 
-    # ── MAIN PARSE METHOD ─────────────────────────────────────────
+    # ── MAIN PARSE ────────────────────────────────────────────────
     def parse(self) -> Dict[str, Any]:
-        """
-        Main method — runs all extraction steps.
-        Returns a dictionary with all extracted information.
-
-        Called by: candidates.py route after file is saved
-        Output passed to: ai_scorer.py for scoring
-        """
+        """Runs all extraction steps and returns structured data."""
         logger.info(f"Parsing resume: {self.file_path.name}")
-
-        # # First extract all text from PDF
         text = self._extract_text()
 
         if not text.strip():
-            logger.error(f"No text extracted from {self.file_path.name}")
             return {
                 "name":             "Unknown",
                 "email":            None,
@@ -251,7 +186,6 @@ class ResumeParser:
                 "parse_error":      "Could not extract text from PDF",
             }
 
-        # # Run all extractors
         result = {
             "name":             self._extract_name(text),
             "email":            self._extract_email(text),
@@ -259,24 +193,17 @@ class ResumeParser:
             "skills":           self._extract_skills(text),
             "experience_years": self._extract_experience(text),
             "education":        self._extract_education(text),
-            "raw_text":         text[:10000],  # # Store first 10k chars
+            "raw_text":         text[:10000],
             "parse_error":      None,
         }
 
         logger.info(
             f"Parsed: name={result['name']} "
-            f"email={result['email']} "
             f"skills={len(result['skills'])} found"
         )
-
         return result
 
 
-# ─── CONVENIENCE FUNCTION ─────────────────────────────────────────
 def parse_resume(file_path: str) -> Dict[str, Any]:
-    """
-    Simple wrapper — creates a ResumeParser and runs parse().
-    This is what other files import and call.
-    """
-    parser = ResumeParser(file_path)
-    return parser.parse()
+    """Wrapper — creates parser and runs parse()."""
+    return ResumeParser(file_path).parse()
