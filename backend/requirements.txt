@@ -8,11 +8,13 @@ psycopg2-binary==2.9.9
 alembic==1.13.1
 
 # ── DATA VALIDATION ────────────────────────────────────────────────
-pydantic==2.6.3
-pydantic-settings==2.2.1
+# # Using newer pydantic that has pre-built wheels for all Python versions
+pydantic==2.7.4
+pydantic-settings==2.3.4
 
 # ── PDF READING ────────────────────────────────────────────────────
-pymupdf==1.24.0
+# # Using newer PyMuPDF that has pre-built wheels — no compilation needed
+PyMuPDF==1.24.3
 pdfplumber==0.11.0
 
 # ── FILE HANDLING ──────────────────────────────────────────────────
